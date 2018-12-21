@@ -1,0 +1,14 @@
+Partition Merge Status : Successful - Mon May 14 19:30:33 2018
+Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version
+Revision Name : ThicknessGauge
+Top-level Entity Name : TOP
+Family : Cyclone III
+Total logic elements : 2,232 / 24,624 ( 9 % )
+    Total combinational functions : 1,975 / 24,624 ( 8 % )
+    Dedicated logic registers : 964 / 24,624 ( 4 % )
+Total registers : 964
+Total pins : 66 / 83 ( 80 % )
+Total virtual pins : 0
+Total memory bits : 344,064 / 608,256 ( 57 % )
+Embedded Multiplier 9-bit elements : 22 / 132 ( 17 % )
+Total PLLs : 1 / 4 ( 25 % )

@@ -1,0 +1,70 @@
+module AD(
+	input clk_100,
+	input RESET_N,
+	input clk_50, 
+	input clk_25,
+	input clk_50_delay,
+	input clk_25_delay,
+	output clk_sample,
+	output clk_sample_delay
+)
+
+   reg	clk_50;
+	reg	clk_25;
+	reg	clk_50_delay;
+	reg	clk_25_delay;
+	wire	clk_sample;
+	wire	clk_sample_delay;
+	always@(posedge clk_100 or negedge RESET_N)
+	begin
+		if(~RESET_N)
+		begin
+			clk_50 <= 0;
+		end
+		else
+		begin
+			clk_50 <= ~clk_50;
+		end
+	end
+	//-----------------------------------------
+	always@(posedge clk_50 or negedge RESET_N)
+	begin
+		if(~RESET_N)
+		begin
+			clk_25 <= 0;
+		end
+		else
+		begin
+			clk_25 <= ~clk_25;
+		end
+	end
+	//-----------------------------------------
+	always@(posedge clk_100_delay or negedge RESET_N)
+	begin
+		if(~RESET_N)
+		begin
+			clk_50_delay <= 0;
+		end
+		else
+		begin
+			clk_50_delay <= ~clk_50_delay;
+		end
+	end
+	//-----------------------------------------
+	always@(posedge clk_50_delay or negedge RESET_N)
+	begin
+		if(~RESET_N)
+		begin
+			clk_25_delay <= 0;
+		end
+		else
+		begin
+			clk_25_delay <= ~clk_25_delay;
+		end
+	end
+	//-----------------------------------------
+		
+	assign clk_sample = (AD_sample_flag == 2) ? clk_100 : (AD_sample_flag == 1) ? clk_50 : clk_25;
+	assign clk_sample_delay = (AD_sample_flag == 2) ? clk_100_delay : (AD_sample_flag == 1) ? clk_50_delay : clk_25_delay;
+
+

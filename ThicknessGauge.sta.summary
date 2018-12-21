@@ -1,0 +1,377 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -14.466
+TNS   : -5841.968
+
+Type  : Slow 1200mV 85C Model Setup 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -13.501
+TNS   : -4823.080
+
+Type  : Slow 1200mV 85C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : -6.651
+TNS   : -253.267
+
+Type  : Slow 1200mV 85C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -5.401
+TNS   : -5.651
+
+Type  : Slow 1200mV 85C Model Setup 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|Coder:U_Coder|count_clk[0]'
+Slack : -4.285
+TNS   : -135.919
+
+Type  : Slow 1200mV 85C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[3]'
+Slack : 0.028
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'ARM_WEn'
+Slack : 0.081
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50_delay'
+Slack : 0.114
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -2.149
+TNS   : -18.083
+
+Type  : Slow 1200mV 85C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -1.461
+TNS   : -3.312
+
+Type  : Slow 1200mV 85C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -0.441
+TNS   : -1.706
+
+Type  : Slow 1200mV 85C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[3]'
+Slack : -0.423
+TNS   : -0.423
+
+Type  : Slow 1200mV 85C Model Hold 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|Coder:U_Coder|count_clk[0]'
+Slack : 0.097
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'ARM_WEn'
+Slack : 0.436
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.436
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50_delay'
+Slack : 0.497
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : -7.292
+TNS   : -302.817
+
+Type  : Slow 1200mV 85C Model Recovery 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -3.946
+TNS   : -1714.355
+
+Type  : Slow 1200mV 85C Model Recovery 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -2.981
+TNS   : -1256.559
+
+Type  : Slow 1200mV 85C Model Removal 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : 1.572
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 2.557
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 5.157
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -4.000
+TNS   : -1829.972
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ARM_WEn'
+Slack : -3.000
+TNS   : -69.915
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|Coder:U_Coder|count_clk[0]'
+Slack : -1.487
+TNS   : -60.967
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50_delay'
+Slack : -1.487
+TNS   : -1.487
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 4.467
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[3]'
+Slack : 4.693
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 5.910
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'FPGA_CLK_AD'
+Slack : 9.923
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 499.681
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -13.009
+TNS   : -5266.711
+
+Type  : Slow 1200mV 0C Model Setup 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -12.328
+TNS   : -4499.251
+
+Type  : Slow 1200mV 0C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : -5.953
+TNS   : -225.462
+
+Type  : Slow 1200mV 0C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -4.776
+TNS   : -4.776
+
+Type  : Slow 1200mV 0C Model Setup 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|Coder:U_Coder|count_clk[0]'
+Slack : -4.017
+TNS   : -125.583
+
+Type  : Slow 1200mV 0C Model Setup 'ARM_WEn'
+Slack : 0.168
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50_delay'
+Slack : 0.208
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[3]'
+Slack : 0.227
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -1.900
+TNS   : -12.866
+
+Type  : Slow 1200mV 0C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -1.425
+TNS   : -3.355
+
+Type  : Slow 1200mV 0C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -0.560
+TNS   : -2.136
+
+Type  : Slow 1200mV 0C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[3]'
+Slack : -0.541
+TNS   : -0.541
+
+Type  : Slow 1200mV 0C Model Hold 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|Coder:U_Coder|count_clk[0]'
+Slack : 0.106
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'ARM_WEn'
+Slack : 0.385
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.385
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50_delay'
+Slack : 0.445
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : -6.595
+TNS   : -272.416
+
+Type  : Slow 1200mV 0C Model Recovery 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -3.500
+TNS   : -1454.375
+
+Type  : Slow 1200mV 0C Model Recovery 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -2.819
+TNS   : -1128.857
+
+Type  : Slow 1200mV 0C Model Removal 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : 1.537
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 2.218
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 4.739
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -4.000
+TNS   : -1829.972
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ARM_WEn'
+Slack : -3.000
+TNS   : -69.915
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|Coder:U_Coder|count_clk[0]'
+Slack : -1.487
+TNS   : -60.967
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50_delay'
+Slack : -1.487
+TNS   : -1.487
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 4.363
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[3]'
+Slack : 4.700
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 5.897
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'FPGA_CLK_AD'
+Slack : 9.911
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 499.650
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -5.777
+TNS   : -2280.945
+
+Type  : Fast 1200mV 0C Model Setup 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -5.201
+TNS   : -1726.490
+
+Type  : Fast 1200mV 0C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : -2.751
+TNS   : -105.727
+
+Type  : Fast 1200mV 0C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -2.016
+TNS   : -2.016
+
+Type  : Fast 1200mV 0C Model Setup 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|Coder:U_Coder|count_clk[0]'
+Slack : -1.329
+TNS   : -38.472
+
+Type  : Fast 1200mV 0C Model Setup 'sys_pll|altpll_component|auto_generated|pll1|clk[3]'
+Slack : 0.144
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'ARM_WEn'
+Slack : 0.592
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50_delay'
+Slack : 0.626
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -1.199
+TNS   : -13.019
+
+Type  : Fast 1200mV 0C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -0.748
+TNS   : -1.633
+
+Type  : Fast 1200mV 0C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -0.166
+TNS   : -0.648
+
+Type  : Fast 1200mV 0C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[3]'
+Slack : -0.151
+TNS   : -0.151
+
+Type  : Fast 1200mV 0C Model Hold 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|Coder:U_Coder|count_clk[0]'
+Slack : 0.051
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'ARM_WEn'
+Slack : 0.178
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.179
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50_delay'
+Slack : 0.208
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : -3.096
+TNS   : -128.123
+
+Type  : Fast 1200mV 0C Model Recovery 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -1.384
+TNS   : -591.474
+
+Type  : Fast 1200mV 0C Model Recovery 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -0.818
+TNS   : -318.076
+
+Type  : Fast 1200mV 0C Model Removal 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : 0.490
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 1.086
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 2.212
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ARM_WEn'
+Slack : -3.000
+TNS   : -50.441
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50'
+Slack : -1.000
+TNS   : -817.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|Coder:U_Coder|count_clk[0]'
+Slack : -1.000
+TNS   : -41.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|clk_50_delay'
+Slack : -1.000
+TNS   : -1.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 4.654
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[3]'
+Slack : 4.785
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 6.002
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'FPGA_CLK_AD'
+Slack : 9.588
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'sys_pll|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 499.784
+TNS   : 0.000
+
+------------------------------------------------------------

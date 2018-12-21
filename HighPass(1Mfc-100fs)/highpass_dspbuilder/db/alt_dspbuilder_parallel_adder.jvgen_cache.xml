@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jvgen name="alt_dspbuilder_parallel_adder" family="Cyclone III"
+    style="COMPLEX" fixed-name="false" temporary="false">
+    <instance version="13.0" decorated-name="alt_dspbuilder_parallel_adder_GNP4SQ3NQE">
+        <generic name="PIPELINE" value="1"/>
+        <generic name="MASKVALUE" value="1"/>
+        <generic name="DIRECTION" value="+-"/>
+        <generic name="DATAWIDTH" value="11"/>
+        <generic name="NUMBER_INPUTS" value="2"/>
+        <port name="aclr" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="clock" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="data0" dir="Input"
+            vhdl-type="std_logic_vector(11-1 downto 0)" width="11" lowerbound="0"/>
+        <port name="data1" dir="Input"
+            vhdl-type="std_logic_vector(11-1 downto 0)" width="11" lowerbound="0"/>
+        <port name="ena" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="result" dir="Output"
+            vhdl-type="std_logic_vector(12-1 downto 0)" width="12" lowerbound="0"/>
+        <port name="user_aclr" dir="Input" vhdl-type="std_logic"
+            width="1" lowerbound="0"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_parallel_adder_GNP4SQ3NQE.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_SAdderSub.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_sAltrBitPropagate.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_vecseq.vhd"/>
+    </instance>
+    <instance version="13.0" decorated-name="alt_dspbuilder_parallel_adder_GNPUE44HJS">
+        <generic name="PIPELINE" value="1"/>
+        <generic name="MASKVALUE" value="1"/>
+        <generic name="DIRECTION" value="+"/>
+        <generic name="DATAWIDTH" value="11"/>
+        <generic name="NUMBER_INPUTS" value="2"/>
+        <port name="aclr" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="clock" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="data0" dir="Input"
+            vhdl-type="std_logic_vector(11-1 downto 0)" width="11" lowerbound="0"/>
+        <port name="data1" dir="Input"
+            vhdl-type="std_logic_vector(11-1 downto 0)" width="11" lowerbound="0"/>
+        <port name="ena" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="result" dir="Output"
+            vhdl-type="std_logic_vector(12-1 downto 0)" width="12" lowerbound="0"/>
+        <port name="user_aclr" dir="Input" vhdl-type="std_logic"
+            width="1" lowerbound="0"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_parallel_adder_GNPUE44HJS.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_SAdderSub.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_sAltrBitPropagate.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_vecseq.vhd"/>
+    </instance>
+    <instance version="13.0" decorated-name="alt_dspbuilder_parallel_adder_GNZVU6W3GJ">
+        <generic name="PIPELINE" value="0"/>
+        <generic name="MASKVALUE" value="1"/>
+        <generic name="DIRECTION" value="+--"/>
+        <generic name="DATAWIDTH" value="57"/>
+        <generic name="NUMBER_INPUTS" value="3"/>
+        <port name="aclr" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="clock" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="data0" dir="Input"
+            vhdl-type="std_logic_vector(57-1 downto 0)" width="57" lowerbound="0"/>
+        <port name="data1" dir="Input"
+            vhdl-type="std_logic_vector(57-1 downto 0)" width="57" lowerbound="0"/>
+        <port name="data2" dir="Input"
+            vhdl-type="std_logic_vector(57-1 downto 0)" width="57" lowerbound="0"/>
+        <port name="ena" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="result" dir="Output"
+            vhdl-type="std_logic_vector(59-1 downto 0)" width="59" lowerbound="0"/>
+        <port name="user_aclr" dir="Input" vhdl-type="std_logic"
+            width="1" lowerbound="0"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_parallel_adder_GNZVU6W3GJ.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_SAdderSub.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_sAltrBitPropagate.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_vecseq.vhd"/>
+    </instance>
+    <instance version="13.0" decorated-name="alt_dspbuilder_parallel_adder_GNYLHLSTWT">
+        <generic name="PIPELINE" value="1"/>
+        <generic name="MASKVALUE" value="1"/>
+        <generic name="DIRECTION" value="+"/>
+        <generic name="DATAWIDTH" value="31"/>
+        <generic name="NUMBER_INPUTS" value="3"/>
+        <port name="aclr" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="clock" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="data0" dir="Input"
+            vhdl-type="std_logic_vector(31-1 downto 0)" width="31" lowerbound="0"/>
+        <port name="data1" dir="Input"
+            vhdl-type="std_logic_vector(31-1 downto 0)" width="31" lowerbound="0"/>
+        <port name="data2" dir="Input"
+            vhdl-type="std_logic_vector(31-1 downto 0)" width="31" lowerbound="0"/>
+        <port name="ena" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="result" dir="Output"
+            vhdl-type="std_logic_vector(33-1 downto 0)" width="33" lowerbound="0"/>
+        <port name="user_aclr" dir="Input" vhdl-type="std_logic"
+            width="1" lowerbound="0"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_parallel_adder_GNYLHLSTWT.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_SAdderSub.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_sAltrBitPropagate.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_vecseq.vhd"/>
+    </instance>
+    <instance version="13.0" decorated-name="alt_dspbuilder_parallel_adder_GNJ3ZMS76T">
+        <generic name="PIPELINE" value="1"/>
+        <generic name="MASKVALUE" value="1"/>
+        <generic name="DIRECTION" value="+"/>
+        <generic name="DATAWIDTH" value="43"/>
+        <generic name="NUMBER_INPUTS" value="3"/>
+        <port name="aclr" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="clock" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="data0" dir="Input"
+            vhdl-type="std_logic_vector(43-1 downto 0)" width="43" lowerbound="0"/>
+        <port name="data1" dir="Input"
+            vhdl-type="std_logic_vector(43-1 downto 0)" width="43" lowerbound="0"/>
+        <port name="data2" dir="Input"
+            vhdl-type="std_logic_vector(43-1 downto 0)" width="43" lowerbound="0"/>
+        <port name="ena" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="result" dir="Output"
+            vhdl-type="std_logic_vector(45-1 downto 0)" width="45" lowerbound="0"/>
+        <port name="user_aclr" dir="Input" vhdl-type="std_logic"
+            width="1" lowerbound="0"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_parallel_adder_GNJ3ZMS76T.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_SAdderSub.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_sAltrBitPropagate.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_vecseq.vhd"/>
+    </instance>
+    <instance version="13.0" decorated-name="alt_dspbuilder_parallel_adder_GNGJR2XP4L">
+        <generic name="PIPELINE" value="0"/>
+        <generic name="MASKVALUE" value="1"/>
+        <generic name="DIRECTION" value="+--"/>
+        <generic name="DATAWIDTH" value="43"/>
+        <generic name="NUMBER_INPUTS" value="3"/>
+        <port name="aclr" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="clock" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="data0" dir="Input"
+            vhdl-type="std_logic_vector(43-1 downto 0)" width="43" lowerbound="0"/>
+        <port name="data1" dir="Input"
+            vhdl-type="std_logic_vector(43-1 downto 0)" width="43" lowerbound="0"/>
+        <port name="data2" dir="Input"
+            vhdl-type="std_logic_vector(43-1 downto 0)" width="43" lowerbound="0"/>
+        <port name="ena" dir="Input" vhdl-type="std_logic" width="1" lowerbound="0"/>
+        <port name="result" dir="Output"
+            vhdl-type="std_logic_vector(45-1 downto 0)" width="45" lowerbound="0"/>
+        <port name="user_aclr" dir="Input" vhdl-type="std_logic"
+            width="1" lowerbound="0"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_parallel_adder_GNGJR2XP4L.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_SAdderSub.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_sAltrBitPropagate.vhd"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_vecseq.vhd"/>
+    </instance>
+    <parameter-static name="PIPELINE" default="0" type="NATURAL"/>
+    <parameter-static name="MASKVALUE" default="1" type="STRING"/>
+    <parameter-static name="DIRECTION" default="+" type="STRING"/>
+    <parameter-static name="DATAWIDTH" default="8" type="POSITIVE"/>
+    <parameter-static name="NUMBER_INPUTS" default="2" type="POSITIVE"/>
+</jvgen>

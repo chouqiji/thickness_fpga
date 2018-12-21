@@ -1,0 +1,7 @@
+
+#QIP file for DSP Builder system highpass
+set_global_assignment -name SEARCH_PATH [file join $::quartus(qip_path) "." ]
+
+set_global_assignment -name "SOURCE_FILE" [file join $::quartus(qip_path) "highpass.mdl" ]
+set_global_assignment -name "SOURCE_FILE" [file join $::quartus(qip_path) "highpass.mdlxml" ]
+set_global_assignment -name "MISC_FILE" [file join $::quartus(qip_path) "highpass.ipx" ]

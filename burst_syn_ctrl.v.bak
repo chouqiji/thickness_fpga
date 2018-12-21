@@ -1,0 +1,88 @@
+///////////////////////////////////////////////////////////////////////////////////
+	
+`timescale 1ns/100ps	
+
+module burst_syn_ctrl(
+	input	wire			clk_100,
+//	input	wire			clk_sample,		//100M,50M,25M	
+	input	wire			reset_n	,
+//	input	wire[1:0]	AD_sample_flag,
+	input	wire[2:0]	burst_period,	//0=>0hz 1=>25hz 2=>50hz 3=>100hz 4=>200hz 5=>400hz 6=>800hz 7=>10kHz(test)
+	output	wire		burst_syn		//
+	);
+
+//	
+//	parameter	burst_period 	= 3'd1;
+	
+	reg[21:0] clk_div_num;//100M
+	always@(posedge clk_100 or negedge reset_n)
+	begin
+		if(~reset_n)
+		begin
+			clk_div_num <= 0;
+		end
+		else
+		begin
+			case(burst_period)
+				0:clk_div_num <= 0;	//0hz
+				1:clk_div_num <= 4000000;//����������	25hz,100Mϵͳʱ�ӣ���Ҫ4000000�η�Ƶ
+				2:clk_div_num <= 2000000;//����������	50hz,100Mϵͳʱ�ӣ���Ҫ2000000�η�Ƶ
+				3:clk_div_num <= 1000000;//����������	100hz,100Mϵͳʱ�ӣ���Ҫ1000000�η�Ƶ
+				4:clk_div_num <= 500000;//����������	200hz,100Mϵͳʱ�ӣ���Ҫ500000�η�Ƶ
+				5:clk_div_num <= 250000;//����������	400hz,100Mϵͳʱ�ӣ���Ҫ250000�η�Ƶ
+				6:clk_div_num <= 125000;//����������	800hz,100Mϵͳʱ�ӣ���Ҫ125000�η�Ƶ
+				7:clk_div_num <= 0;
+			endcase
+		end
+	end
+	
+//	wire [21:0]clk_div_num;
+//	assign clk_div_num = (AD_sample_flag == 2) ? clk_div_num_tmp : (AD_sample_flag == 1) ? {1'b0,clk_div_num_tmp[21:1]} : {2'b0,clk_div_num_tmp[21:2]};
+	
+	reg[21:0] clk_div_couunter;	
+	reg	burst_syn_tmp;//���崮ͬ��
+	always@(posedge clk_100 or negedge reset_n)
+	begin
+		if(~reset_n)
+		begin
+			clk_div_couunter <= 0;
+			burst_syn_tmp <= 0;
+		end
+		else if(clk_div_num == 0)
+		begin
+			burst_syn_tmp = 1'b0;
+		end
+		else
+		begin
+			if(clk_div_couunter >= (clk_div_num-1))
+			begin
+				clk_div_couunter <= 0;
+			end
+			else
+			begin
+				clk_div_couunter <= clk_div_couunter + 1'b1;
+			end
+			burst_syn_tmp <= (clk_div_couunter > (clk_div_num-50));
+		end
+	end
+	
+	//������ͬ���ź�
+	reg	burst_syn_test = 0	;//���崮ͬ��
+	reg[13:0] burst_syn_test_counter = 0;
+	always@(posedge clk_100)
+	begin
+		if(~reset_n)
+		begin
+			burst_syn_test_counter <= 0;
+			burst_syn_test <= 0;//��ʱ�������ź�
+		end
+		else
+		begin
+			burst_syn_test_counter <= burst_syn_test_counter + 1'b1;
+			burst_syn_test <= (burst_syn_test_counter < 50);//��ʱ�������ź�
+		end
+	end
+	
+	assign burst_syn = (burst_period == 7) ? burst_syn_test : burst_syn_tmp;
+
+endmodule

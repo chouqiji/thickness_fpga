@@ -1,0 +1,58 @@
+
+State Machine - |TOP|Electromagnetic_Acoustic:Electromagnetic_Acoustic|pulse_gen:U_pulse_gen|state_wr
+Name state_wr.STATE_P state_wr.STATE_L state_wr.STATE_H state_wr.0000 state_wr.STATE_QUIT 
+state_wr.0000 0 0 0 0 0 
+state_wr.STATE_H 0 0 1 1 0 
+state_wr.STATE_L 0 1 0 1 0 
+state_wr.STATE_P 1 0 0 1 0 
+state_wr.STATE_QUIT 0 0 0 1 1 
+
+State Machine - |TOP|Electromagnetic_Acoustic:Electromagnetic_Acoustic|burst_syn_ctrl:U_burst_syn_ctrl|state1
+Name state1.11 state1.10 state1.01 state1.00 
+state1.00 0 0 0 0 
+state1.01 0 0 1 1 
+state1.10 0 1 0 1 
+state1.11 1 0 0 1 
+
+State Machine - |TOP|Electromagnetic_Acoustic:Electromagnetic_Acoustic|burst_syn_ctrl:U_burst_syn_ctrl|state
+Name state.11 state.10 state.01 state.00 
+state.00 0 0 0 0 
+state.01 0 0 1 1 
+state.10 0 1 0 1 
+state.11 1 0 0 1 
+
+State Machine - |TOP|Electromagnetic_Acoustic:Electromagnetic_Acoustic|Coder:U_Coder|state
+Name state.001 
+state.000 0 
+state.001 1 
+
+State Machine - |TOP|Electromagnetic_Acoustic:Electromagnetic_Acoustic|protect:U_protect|state1
+Name state1.STATE_IDLE state1.STATE_P_WAIT state1.STATE_P_TEST 
+state1.STATE_IDLE 0 0 0 
+state1.STATE_P_TEST 1 0 1 
+state1.STATE_P_WAIT 1 1 0 
+
+State Machine - |TOP|Electromagnetic_Acoustic:Electromagnetic_Acoustic|protect:U_protect|state
+Name state.STATE_IDLE state.STATE_P_WAIT state.STATE_P_TEST 
+state.STATE_IDLE 0 0 0 
+state.STATE_P_TEST 1 0 1 
+state.STATE_P_WAIT 1 1 0 
+
+State Machine - |TOP|Electromagnetic_Acoustic:Electromagnetic_Acoustic|signal_pro:U_signal_pro|Average:U1_Average|state
+Name state.1001 state.1000 state.0111 state.0110 state.0101 state.0100 state.0011 state.0010 state.0001 state.0000 
+state.0000 0 0 0 0 0 0 0 0 0 0 
+state.0001 0 0 0 0 0 0 0 0 1 1 
+state.0010 0 0 0 0 0 0 0 1 0 1 
+state.0011 0 0 0 0 0 0 1 0 0 1 
+state.0100 0 0 0 0 0 1 0 0 0 1 
+state.0101 0 0 0 0 1 0 0 0 0 1 
+state.0110 0 0 0 1 0 0 0 0 0 1 
+state.0111 0 0 1 0 0 0 0 0 0 1 
+state.1000 0 1 0 0 0 0 0 0 0 1 
+state.1001 1 0 0 0 0 0 0 0 0 1 
+
+State Machine - |TOP|Electromagnetic_Acoustic:Electromagnetic_Acoustic|AD:U_AD|state
+Name state.STATE_IDLE state.STATE_QUIT state.STATE_SAMPLE 
+state.STATE_IDLE 0 0 0 
+state.STATE_SAMPLE 1 0 1 
+state.STATE_QUIT 1 1 0 

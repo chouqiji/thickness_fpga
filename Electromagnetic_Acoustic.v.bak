@@ -1,0 +1,465 @@
+///////////////////////////////////////////////////////////////////////////////////
+//module name:	Electromagnetic_Acoustic
+//file name:	Electromagnetic_Acoustic.v
+//time:			2012-4-25 10:54:07
+//Programmer:	ld
+//======Introduction=======
+//
+//
+//`define debug
+
+`timescale 1ns/100ps
+module Electromagnetic_Acoustic(
+//------------Global Signals------------------
+	input		wire			clk_sys,
+	input		wire			clk_100,
+	input		wire			clk_100_delay,
+	input		wire			clk_coder,
+	
+	input		wire			RESET_N,
+//	output	wire 			SYS_RST,
+	output	wire 			alarm_buzzer,		//alarm
+//-------------ARM interface------------------
+	input		wire[7:0]	ARM_A,
+	inout		wire[15:0]	ARM_D,
+	input		wire			iARM_CE_N, 
+	input		wire			iARM_OE_N,				//nOE (Output Enable) indicates that the current bus cycle is a read cycle.
+	input		wire			iARM_WE_N,				//nWE (Write Enable) indicates that the current bus cycle is a write cycle.
+	input		wire[ 1:0]	iWrite_Strobe,			//unused
+	input		wire[ 1:0]	iRead_Strobe,			//unused
+	input		wire			iARM_DAC_ALARM,	
+	input		wire			iARM_VAL_ALARM,	
+	input		wire			iARM_LOGIC_RESET,	
+//------------DA0 interface-------------------	
+	output	wire			oDA_SCLK,	
+	output	wire			oDA_DOUT,	
+	output	wire			oDA_SYNC_n,  
+	output	wire			oDA_LDAC_n,  
+//------------AD9215 interface----------------
+	output	wire			oAD0_CLK,		//max = 40Mhz
+//	input		wire			iAD0_otr,		//out of range
+	input		wire[9:0]	iAD0_DATA,		//AD collect data
+//-----------Coder interface------------------
+	input		wire			CoderInputA,
+	input		wire			CoderInputB,		
+//-----------T/R interface-----------------
+	input		wire			protect_in,		//protect
+	output	wire			oTrigger0,
+	output	wire			oTrigger1,
+	output   wire        receive_amp_en,
+	//	output	wire 			Probe_mode,
+//-----------POWER interface-----------------
+	input		wire 			pow_key_det,		//System Power Key Detect
+	output	wire 			powen_sys,			//System POWER ON/OFF Control 1 --> ON; 0 --> OFF
+	output	wire 			powen_mosfet,		//FPGA POWER(3.3V/2.5V/1.2V) control 1-->OFF; 0-->ON
+	output	wire 			powen_lcd,			//
+	output	wire 			powen_HV				//LCD/AD/T/R POWER(VLED/3V/+-5V/15V) Control: 1-->ON; 0-->OFF
+//-----------test-----------------
+	//	output	wire 			AD_sample_en
+	//	input		wire[ 1:0]	test1,			//unused
+	//	output	wire[15:0]	test2				//unused
+);
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX										
+//---------------ARM interface---------------------
+//function
+//1.provide parameters like pluse_num, pulse_period etc.
+//2.provide control signals like enable, start etc.
+//3.read back the processed data to ARM
+//
+	//--------------------------------
+	wire			ARM_read;//ARM read signal, high enable
+	wire			ARM_read_fifo_clk;
+	wire[9:0]	ARM_read_fifo_data;
+	reg [15:0]	ARM_read_data;
+
+	assign	ARM_read	= ~iARM_CE_N & ~iARM_OE_N;
+	assign	ARM_D		=	ARM_read	 ?  ARM_read_data : 16'hzzzz;	
+	
+	//assign ARM_read_fifo_clk = ARM_read&&(ARM_A[7:2] == 6'h20);//posedge ARM_read
+	
+	//--Synchronization logic is used to read data--
+	reg ARM_read_buf = 0;
+	reg ARM_read_buf2 = 0;
+	wire  ARM_read_fifo_rdreq;
+	
+	always@(posedge clk_sys)
+	begin
+		if(!RESET_N)
+		begin
+			ARM_read_buf <= 0;
+			ARM_read_buf2 <= 0;
+		end
+		else
+		begin
+			ARM_read_buf <= ARM_read;
+			ARM_read_buf2 <= ARM_read_buf;
+		end
+	end
+	//assign ARM_read_fifo_rdreq =(!ARM_read_buf2&ARM_read_buf)&&(ARM_A[7:2] == 6'h20);//posedge ARM_read
+	
+	assign ARM_read_fifo_rdreq =(!ARM_read_buf2)&ARM_read_buf&ARM_A[7]&(!ARM_A[6])&(!ARM_A[5])&(!ARM_A[4])&(!ARM_A[3])&(!ARM_A[2]);//posedge ARM_readassign test2 = ARM_read_fifo_rdreq;
+	
+	
+	wire protect_en;
+	//ARM_read_fifo_data						//addr-80H,
+	wire ARM_data_ready; 					//addr-84H,
+	wire [9:0]ARM_MAX_data;				//addr-88H,
+	wire signed[31:0]	CoderPosition;		//addr-ַ88H,
+	always @ ( * )
+	begin
+		case ( ARM_A[7:2] )
+			6'h20:ARM_read_data = {6'd0,ARM_read_fifo_data};
+//			6'h21:ARM_read_data = {15'h0,ARM_data_ready};
+			6'h21:ARM_read_data = {14'h0,protect_en,ARM_data_ready};
+			6'h22:ARM_read_data = CoderPosition[15:0];
+			6'h23:ARM_read_data = CoderPosition[31:16];
+			6'h30:ARM_read_data = {6'd0,ARM_MAX_data};
+//			6'h23:ARM_read_data = 0;
+			default: ARM_read_data = 0;
+		endcase
+	end
+
+	//ARM wirte signal-----------------------------------------------------
+	//参数设置
+	//由于参数基本不变，故可以暂时不用考虑跨时钟域的问题。
+
+	reg[2:0]		burst_period;			//addr-00H:RepeatFreq 0=>0hz 1=>25hz 2=>50hz 3=>100hz 4=>200hz 5=>400hz 6=>800hz 7=>simulation 10kHz
+	reg[1:0]		AD_sample_flag;		//addr-ַ04H
+	reg[9:0]		pulse_period;			//addr-ַ0CH PluseFreq	0.2 ~ 10 MHz
+	reg[5:0]		pulse_num;				//addr-ַ10H:PluseNum	5~50
+	reg[11:0]	gain_codeA;				//addr-ַ14H
+//	reg[11:0]	gain_codeB;				//addr-ַ18H
+	//reg[2:0]		AD_clk_div_num;	//addr-1CH
+	reg 	   	PositionClear_n;		//addr-20H
+//	reg[11:0]	alarm_time_begin;		//addr-ַ24H
+//	reg[11:0]	alarm_time_end;		//addr-ַ28H
+//	reg[15:0]	alarm_AM;				//addr-2CH
+	reg			ARM_read_over; 		//addr-ַ30H
+	reg 			ARM_powdn_cmd;			//addr-34H
+	reg			alarm_en;				//addr-ַ38H
+//	reg 			probe_mode_r;			//addr-ַ3CH
+	reg [7:0]	LightScale;
+
+	always@(posedge iARM_WE_N)
+	begin
+		if(!iARM_CE_N)//ARM checked
+		begin
+			case(ARM_A[7:2])//
+				6'h00:burst_period[2:0]        	<= ARM_D[ 2:0];
+				6'h01:AD_sample_flag[1:0]		  	<= ARM_D[ 1:0];
+				//6'h02:AD_sample_length[15:0 ]  	<= ARM_D[15:0];
+				6'h03:pulse_period[9:0]        	<= ARM_D[ 9:0];
+				6'h04:pulse_num[5:0]           	<= ARM_D[ 5:0];
+				6'h05:gain_codeA[11:0]         	<= ARM_D[11:0];
+				6'h06:LightScale[7:0]         	<= ARM_D[7:0];
+				//6'h07:AD_clk_div_num[2:0]      	<= ARM_D[ 2:0];
+				6'h08:PositionClear_n           	<= ARM_D[   0];
+//				6'h09:alarm_time_begin[11:0]   	<= ARM_D[11:0];
+//				6'h0A:alarm_time_end[11:0]     	<= ARM_D[11:0];
+//				6'h0B:alarm_AM[15:0]           	<= ARM_D[15:0];
+				6'h0C:ARM_read_over            	<= ARM_D[	0];
+				6'h0D:ARM_powdn_cmd            	<= ARM_D[	0];
+				6'h0E:alarm_en            	   	<= ARM_D[	0];
+//				6'h0F:probe_mode_r            	<= ARM_D[	0];
+				default:;
+			endcase
+		end
+	end
+
+//	assign Probe_mode = probe_mode_r;
+	
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX		
+//------------Power Down Control Logic-------------------
+	
+	reg [31:0] 	pow_key_det_cnt = 0;
+	reg [31:0] 	powdn_delay_cnt = 0;
+	reg 			FPGA_powdn_cmd = 0;
+	reg 			Sys_powdn_r = 0;
+	reg [16:0]  div_cnt = 0;
+	reg 			powdn_cnt_puls = 0;
+	
+	always @(posedge clk_sys)
+	begin
+		if(!RESET_N)
+		begin
+			div_cnt <= 0;
+			powdn_cnt_puls <= 0;
+		end
+		else if(div_cnt<80_000)
+		begin
+			div_cnt <=  div_cnt +1'b1;
+			powdn_cnt_puls <= 0;
+		end
+		else 
+		begin
+			div_cnt <= 0;
+			powdn_cnt_puls <= 1;
+		end		
+	end
+	
+	
+	reg pow_key_det_buf1 = 0;
+	reg pow_key_det_buf2 = 0;		
+	always @(posedge clk_sys)
+	begin
+		if(!RESET_N)
+		begin
+			pow_key_det_cnt <= 0;
+			FPGA_powdn_cmd <= 0;
+			Sys_powdn_r <= 0;
+		end
+		else if(powdn_cnt_puls)
+		begin
+			pow_key_det_buf1 <= pow_key_det;
+			pow_key_det_buf2 <= pow_key_det_buf1;
+			if({pow_key_det_buf2,pow_key_det_buf1} == 2'b00)
+			begin 
+				pow_key_det_cnt <=  pow_key_det_cnt + 32'b1;
+				if ( pow_key_det_cnt > 5_000 ) //timeout shutdown (ms)
+					FPGA_powdn_cmd <= 1;
+			end
+			else 
+				pow_key_det_cnt <= 0;
+				
+			if(ARM_powdn_cmd || FPGA_powdn_cmd)//������һ���йػ�����͹ػ�
+				powdn_delay_cnt <= powdn_delay_cnt + 1'b1;
+			else 
+				powdn_delay_cnt <= powdn_delay_cnt;
+			if(powdn_delay_cnt > 1_000 )	//delay 1s shutdown (ms)
+				Sys_powdn_r <= 0;
+			else
+				Sys_powdn_r <= 1;
+		end
+	end
+	
+	assign powen_sys = Sys_powdn_r;  
+//	assign powen_sys = 1'b1; 	//test
+	
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//------------------------Alarm Control Logic------------------------
+
+wire clk_2hz;
+assign alarm_buzzer = clk_2hz & protect_en & alarm_en;
+//assign alarm_buzzer = clk_2hz & protect_en;
+
+reg [23:0] count_clk;
+always@(posedge clk_coder or negedge RESET_N)
+begin
+	if(~RESET_N)
+	begin
+		count_clk <= 24'd0;
+	end
+	else
+	begin
+		if(count_clk < 24'd2000000)
+		begin
+			count_clk <= count_clk + 24'd1;
+		end
+		else
+		begin
+			count_clk <= 24'd0;
+		end
+	end
+end
+assign clk_2hz = (count_clk < 24'd500000) ? 1'b1 : 1'b0;
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//--------------------------LCD Lightness Control Logic-------------------------	
+wire	LCDen;
+LCDENctrl LCDENctrl_u(
+	.clk				(clk_coder			),
+	.reset_n			(RESET_N				),
+	.LightScale		(LightScale			),
+	.LCDen			(LCDen				)
+);
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//--------------------------Coder Control Logic-------------------------	
+//wire [31:0]	CoderPosition;
+Coder Coder_u(
+	.clk				(clk_coder			),
+	.reset_n			(RESET_N				),
+	.CountClear_n	(PositionClear_n	),
+	.SignalA			(CoderInputA		),
+	.SignalB			(CoderInputB		),
+	.dout				(CoderPosition		)
+);
+
+
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//--------------------------AD-------------------------
+	reg	clk_50;
+	reg	clk_25;
+	reg	clk_50_delay;
+	reg	clk_25_delay;
+	wire	clk_sample;
+	wire	clk_sample_delay;
+	always@(posedge clk_100 or negedge RESET_N)
+	begin
+		if(~RESET_N)
+		begin
+			clk_50 <= 0;
+		end
+		else
+		begin
+			clk_50 <= ~clk_50;
+		end
+	end
+	//-----------------------------------------
+	always@(posedge clk_50 or negedge RESET_N)
+	begin
+		if(~RESET_N)
+		begin
+			clk_25 <= 0;
+		end
+		else
+		begin
+			clk_25 <= ~clk_25;
+		end
+	end
+	//-----------------------------------------
+	always@(posedge clk_100_delay or negedge RESET_N)
+	begin
+		if(~RESET_N)
+		begin
+			clk_50_delay <= 0;
+		end
+		else
+		begin
+			clk_50_delay <= ~clk_50_delay;
+		end
+	end
+	//-----------------------------------------
+	always@(posedge clk_50_delay or negedge RESET_N)
+	begin
+		if(~RESET_N)
+		begin
+			clk_25_delay <= 0;
+		end
+		else
+		begin
+			clk_25_delay <= ~clk_25_delay;
+		end
+	end
+	//-----------------------------------------
+		
+	assign clk_sample = (AD_sample_flag == 2) ? clk_100 : (AD_sample_flag == 1) ? clk_50 : clk_25;
+	assign clk_sample_delay = (AD_sample_flag == 2) ? clk_100_delay : (AD_sample_flag == 1) ? clk_50_delay : clk_25_delay;
+	
+	wire burst_syn;	
+	wire AD_sample_en;
+	wire AD_data_valid;
+	assign oAD0_CLK= clk_sample_delay & AD_sample_en;
+
+	AD_clk_gen AD_clk_gen_u(
+			.reset_n				(RESET_N	&& iARM_LOGIC_RESET),
+			.clk_sample			(clk_sample		),
+			.burst_syn			(burst_syn		),
+			.AD_sample_en		(AD_sample_en	),
+			.AD_data_valid		(AD_data_valid	)
+			);	
+	
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX		
+//---------------Burst Repeat Freq Control Logic-------------------------
+//Request:	Burst Repeat Freq--25,50,100,200,400,800Hz
+//Input:		burst_period
+//Output:	synchronizing signal
+
+//	wire burst_syn;	//
+	
+	burst_syn_ctrl burst_syn_ctrl_u(
+		.clk_100		 		(clk_100				),
+//		.clk_sample	 		(clk_sample			),
+		.reset_n		 		(RESET_N				),
+//		.AD_sample_flag	(AD_sample_flag	),
+		.burst_period		(burst_period		),
+		.burst_syn			(burst_syn			)
+		);
+	
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX	
+//-------------------------pulse Control Logic-----------------------
+
+	wire   pulse_out;//
+//	wire protect_en;
+	pulse_gen	pulse_gen_u(	
+		.clk					(clk_100		),
+		.reset_n				(RESET_N			),
+//		.AD_sample_flag	(AD_sample_flag	),
+		.pulse_period		(pulse_period	),
+		.pulse_num			(pulse_num		),
+		.burst_syn			(burst_syn		),
+		.protect_en			(1'b0				),
+		.pulse_out			(pulse_out		)
+		);
+
+//protect Control Logic
+    
+	protect	protect_u(	
+		.clk			(clk_100	),
+		.reset_n		(RESET_N		),
+//		.AD_sample_flag	(AD_sample_flag	),
+		.protect_in	(protect_in	),
+		.protect_en	(protect_en	)
+		);
+	
+	assign	oTrigger0 = pulse_out;// P
+	assign	oTrigger1 = !pulse_out;// N
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX			
+//-------------------------AD5322-----------------------------	
+//AD5322
+//
+//
+//	
+	wire AD5322_en;
+	AD5322 AD5322_u(
+		.clk				(clk_sys   		),//less than 150MHz
+		.rst_n			(RESET_N			),
+		.en				(AD5322_en		),
+		.ChannelA_data	(gain_codeA		),
+		.ChannelB_data	(gain_codeA		),
+		.sclk				(oDA_SCLK		),
+		.dout				(oDA_DOUT		),
+		.sync_n			(oDA_SYNC_n		),
+		.ldac_n			(oDA_LDAC_n		)	
+		);	
+					
+
+						
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//-----------------------    ---------------------------
+	
+
+	signal_pro signal_pro_u(
+		.clk						(clk_sample					),
+		.reset_n					(RESET_N  && iARM_LOGIC_RESET	),	
+		.AD_data_in				(iAD0_DATA				),
+		.AD_data_valid			(AD_data_valid			),//
+//		.Avg_Sram_full			(Avg_Sram_full			),//
+		.ARM_read_fifo_data	(ARM_read_fifo_data 	),
+		.ARM_MAX_data			(ARM_MAX_data			),
+		.ARM_read_fifo_clk	(clk_sys					),
+		.ARM_read_fifo_rdreq	(ARM_read_fifo_rdreq	),
+		.ARM_read_over			(ARM_read_over			),      
+		.ARM_data_ready		(ARM_data_ready		)
+		//.test						(							)     
+		);
+
+	assign AD5322_en = ~AD_sample_en; //在AD不采样的时间一直更新放大器增益
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//电源控制，在AD采样期间将电源关掉，由电容供电，其他时间将电源打开给电容充电
+
+//	assign powen_mosfet   =  Sys_powdn_r ? ~AD_sample_en : 1'b0;    
+	
+	assign powen_lcd   =  LCDen & (~AD_sample_en);
+	assign powen_mosfet   =  ~AD_sample_en;
+	assign powen_HV = ~AD_sample_en;
+	assign receive_amp_en = ~AD_sample_en;
+
+
+
+
+endmodule

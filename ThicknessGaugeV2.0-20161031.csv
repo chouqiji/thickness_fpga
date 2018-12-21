@@ -1,0 +1,89 @@
+# Copyright (C) 1991-2013 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+# Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
+# File: E:\FPGA\ThicknessGauge\v2.0\FPGA_ETG_v4.0_100M_SmoothAvg20160311_test\ThicknessGaugeV2.0-20161031.csv
+# Generated on: Mon Oct 31 18:23:15 2016
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
+
+To,Direction,Location,I/O Bank,VREF Group,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair
+AD_CLK,Output,PIN_106,6,B6_N0,,,,,
+AD_D[9],Input,PIN_89,5,B5_N0,,,,,
+AD_D[8],Input,PIN_90,6,B6_N0,,,,,
+AD_D[7],Input,PIN_91,6,B6_N0,,,,,
+AD_D[6],Input,PIN_98,6,B6_N0,,,,,
+AD_D[5],Input,PIN_99,6,B6_N0,,,,,
+AD_D[4],Input,PIN_100,6,B6_N0,,,,,
+AD_D[3],Input,PIN_101,6,B6_N0,,,,,
+AD_D[2],Input,PIN_103,6,B6_N0,,,,,
+AD_D[1],Input,PIN_104,6,B6_N0,,,,,
+AD_D[0],Input,PIN_105,6,B6_N0,,,,,
+ARM_ADDR[7],Input,PIN_66,4,B4_N0,,,,,
+ARM_ADDR[6],Input,PIN_65,4,B4_N0,,,,,
+ARM_ADDR[5],Input,PIN_67,4,B4_N0,,,,,
+ARM_ADDR[4],Input,PIN_68,4,B4_N0,,,,,
+ARM_ADDR[3],Input,PIN_69,4,B4_N0,,,,,
+ARM_ADDR[2],Input,PIN_72,4,B4_N0,,,,,
+ARM_ADDR[1],Input,PIN_71,4,B4_N0,,,,,
+ARM_ADDR[0],Input,PIN_44,3,B3_N0,,,,,
+ARM_CE,Input,PIN_23,1,B1_N0,,,,,
+ARM_DATA[15],Bidir,PIN_43,3,B3_N0,,,,,
+ARM_DATA[14],Bidir,PIN_42,3,B3_N0,,,,,
+ARM_DATA[13],Bidir,PIN_32,2,B2_N0,,,,,
+ARM_DATA[12],Bidir,PIN_28,2,B2_N0,,,,,
+ARM_DATA[11],Bidir,PIN_33,2,B2_N0,,,,,
+ARM_DATA[10],Bidir,PIN_30,2,B2_N0,,,,,
+ARM_DATA[9],Bidir,PIN_39,3,B3_N0,,,,,
+ARM_DATA[8],Bidir,PIN_31,2,B2_N0,,,,,
+ARM_DATA[7],Bidir,PIN_60,4,B4_N0,,,,,
+ARM_DATA[6],Bidir,PIN_64,4,B4_N0,,,,,
+ARM_DATA[5],Bidir,PIN_59,4,B4_N0,,,,,
+ARM_DATA[4],Bidir,PIN_50,3,B3_N0,,,,,
+ARM_DATA[3],Bidir,PIN_58,4,B4_N0,,,,,
+ARM_DATA[2],Bidir,PIN_49,3,B3_N0,,,,,
+ARM_DATA[1],Bidir,PIN_51,3,B3_N0,,,,,
+ARM_DATA[0],Bidir,PIN_46,3,B3_N0,,,,,
+ARM_OEn,Input,PIN_25,2,B2_N0,,,,,
+ARM_WEn,Input,PIN_24,2,B2_N0,,,,,
+CODER_A,Input,PIN_110,7,B7_N0,,,,,
+CODER_B,Input,PIN_111,7,B7_N0,,,,,
+DA_DIN,Output,PIN_115,7,B7_N0,,,,,
+DA_LDAC,Output,PIN_114,7,B7_N0,,,,,
+DA_SCLK,Output,PIN_119,7,B7_N0,,,,,
+DA_SYNC,Output,PIN_120,7,B7_N0,,,,,
+FPGA_BUZZER,Output,PIN_4,1,B1_N0,,,,,
+FPGA_CLK_AD,Input,PIN_88,5,B5_N0,,,,,
+FPGA_CLK_EN,Output,PIN_87,5,B5_N0,,,,,
+FPGA_CLK_SYS,Input,PIN_52,3,B3_N0,,,,,
+FPGA_GPIO[6],Bidir,PIN_77,5,B5_N0,,,,,
+FPGA_GPIO[5],Bidir,PIN_79,5,B5_N0,,,,,
+FPGA_GPIO[4],Bidir,PIN_80,5,B5_N0,,,,,
+FPGA_GPIO[3],Bidir,PIN_83,5,B5_N0,,,,,
+FPGA_GPIO[2],Bidir,PIN_85,5,B5_N0,,,,,
+FPGA_GPIO[1],Bidir,,,,,,,,
+FPGA_GPIO[0],Bidir,,,,,,,,
+IOV_HIGH,Input,PIN_129,8,B8_N0,Differential LVPECL,,,,IOV_HIGH(n)
+KEY_CTRL,Output,PIN_10,1,B1_N0,,,,,
+KEY_DET,Input,PIN_55,4,B4_N0,,,,,
+LCDBL_EN,Output,PIN_86,5,B5_N0,,,,,
+POW_CTRL,Output,PIN_7,1,B1_N0,,,,,
+PWDN,Output,PIN_142,8,B8_N0,,,,,
+RESET_IN,Input,PIN_22,1,B1_N0,,,,,
+SYS_RESET_n,Output,PIN_11,1,B1_N0,,,,,
+TRIGGER_N,Output,PIN_143,8,B8_N0,,,,,
+TRIGGER_P,Output,PIN_144,8,B8_N0,,,,,
+TempOV,Input,PIN_121,7,B7_N0,,,,,
+receive_amp_en,Output,PIN_135,8,B8_N0,,,,,
+IOV_HIGH(n),Input,PIN_128,8,B8_N0,Differential LVPECL,,,,IOV_HIGH

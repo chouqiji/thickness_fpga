@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+ <!--  date: 2016.12.27.18:31:44 -->
+ <component
+   name="highpass"
+   file="highpass.mdl"
+   displayName="highpass"
+   version="1.0"
+   description="A DSP Builder System."
+   tags="AUTHORSHIP=DSPBuilder Design"
+   categories="DSPBuilder 7.1 Components"
+   factory="DSPBuilderFactory" />
+ <component
+   name="highpass_Interface"
+   file="highpass.mdl"
+   displayName="highpass_Interface"
+   version="1.0"
+   description="A DSP Builder System."
+   tags="AUTHORSHIP=DSPBuilder Design"
+   categories="DSPBuilder Systems"
+   factory="DSPBuilderFactory" />
+</library>

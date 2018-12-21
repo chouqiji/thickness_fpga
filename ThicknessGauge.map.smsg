@@ -1,0 +1,3 @@
+Warning (10268): Verilog HDL information at signal_pro.v(84): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at burst_syn_ctrl.v(66): always construct contains both blocking and non-blocking assignments
+Info (10281): Verilog HDL Declaration information at AD.v(13): object "RESET_N" differs only in case from object "reset_n" in the same scope

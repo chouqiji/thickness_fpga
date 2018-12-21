@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+ <!--  date: 2016.06.02.10:35:06 -->
+ <component
+   name="bandpass4M"
+   file="bandpass4M.mdl"
+   displayName="bandpass4M"
+   version="1.0"
+   description="A DSP Builder System."
+   tags="AUTHORSHIP=DSPBuilder Design"
+   categories="DSPBuilder 7.1 Components"
+   factory="DSPBuilderFactory" />
+ <component
+   name="bandpass4M_Interface"
+   file="bandpass4M.mdl"
+   displayName="bandpass4M_Interface"
+   version="1.0"
+   description="A DSP Builder System."
+   tags="AUTHORSHIP=DSPBuilder Design"
+   categories="DSPBuilder Systems"
+   factory="DSPBuilderFactory" />
+</library>

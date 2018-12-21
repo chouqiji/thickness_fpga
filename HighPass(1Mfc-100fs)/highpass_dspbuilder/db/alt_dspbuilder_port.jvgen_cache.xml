@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jvgen name="alt_dspbuilder_port" family="Cyclone III" style="COMPLEX"
+    fixed-name="false" temporary="false">
+    <instance version="13.0" decorated-name="alt_dspbuilder_port_GNSSYS4J5R">
+        <generic name="WIDTH" value="10"/>
+        <generic name="HDLTYPE" value="STD_LOGIC_VECTOR"/>
+        <port name="input" dir="Input"
+            vhdl-type="std_logic_vector(10-1 downto 0)" width="10" lowerbound="0"/>
+        <port name="output" dir="Output"
+            vhdl-type="std_logic_vector(10-1 downto 0)" width="10" lowerbound="0"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_port_GNSSYS4J5R.vhd"/>
+    </instance>
+    <instance version="13.0" decorated-name="alt_dspbuilder_port_GN4K6H3QBP">
+        <generic name="WIDTH" value="12"/>
+        <generic name="HDLTYPE" value="STD_LOGIC_VECTOR"/>
+        <port name="input" dir="Input"
+            vhdl-type="std_logic_vector(12-1 downto 0)" width="12" lowerbound="0"/>
+        <port name="output" dir="Output"
+            vhdl-type="std_logic_vector(12-1 downto 0)" width="12" lowerbound="0"/>
+        <generated-file file-type="VHDL" filename="alt_dspbuilder_port_GN4K6H3QBP.vhd"/>
+    </instance>
+    <parameter-static name="EXPORT" default="true" type="STRING"/>
+    <parameter-static name="PIN" default="" type="STRING"/>
+    <parameter-static name="PORTTYPE" default="Input" type="STRING"/>
+    <parameter-static name="WIDTH" default="8" type="NATURAL"/>
+    <parameter-static name="HDLTYPE" default="STD_LOGIC_VECTOR" type="STRING"/>
+</jvgen>

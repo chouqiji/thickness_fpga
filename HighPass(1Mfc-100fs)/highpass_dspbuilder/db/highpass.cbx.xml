@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="highpass">
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNJ3ZMS76T:adder3|alt_dspbuilder_SAdderSub:adder_1_2|LPM_ADD_SUB:\pip:genaa:U0" CBX_FILE_NAME="add_sub_msh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNJ3ZMS76T:adder3|alt_dspbuilder_SAdderSub:adder_2_1|LPM_ADD_SUB:\pip:genaa:U0" CBX_FILE_NAME="add_sub_nsh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNYLHLSTWT:adder4|alt_dspbuilder_SAdderSub:adder_1_2|LPM_ADD_SUB:\pip:genaa:U0" CBX_FILE_NAME="add_sub_jsh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNYLHLSTWT:adder4|alt_dspbuilder_SAdderSub:adder_2_1|LPM_ADD_SUB:\pip:genaa:U0" CBX_FILE_NAME="add_sub_ksh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|alt_dspbuilder_parallel_adder_GNP4SQ3NQE:parallel_adder_subtractor1|alt_dspbuilder_SAdderSub:adder_1_1|LPM_ADD_SUB:\pip:genas:U0" CBX_FILE_NAME="add_sub_ith.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNGJR2XP4L:adder2|alt_dspbuilder_SAdderSub:adder_2_1|LPM_ADD_SUB:\nopip:genaa:U0" CBX_FILE_NAME="add_sub_rbg.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNZVU6W3GJ:adder1|alt_dspbuilder_SAdderSub:adder_2_1|LPM_ADD_SUB:\nopip:genaa:U0" CBX_FILE_NAME="add_sub_0cg.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|alt_dspbuilder_parallel_adder_GNPUE44HJS:parallel_adder_subtractor|alt_dspbuilder_SAdderSub:adder_1_1|LPM_ADD_SUB:\pip:genaa:U0" CBX_FILE_NAME="add_sub_hsh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNGJR2XP4L:adder2|alt_dspbuilder_SAdderSub:adder_1_1|LPM_ADD_SUB:\nopip:genas:U0" CBX_FILE_NAME="add_sub_rcg.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNZVU6W3GJ:adder1|alt_dspbuilder_SAdderSub:adder_1_1|LPM_ADD_SUB:\nopip:genas:U0" CBX_FILE_NAME="add_sub_0dg.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNGJR2XP4L:adder2|alt_dspbuilder_SAdderSub:adder_1_2|LPM_ADD_SUB:\nopip:gensa:U0" CBX_FILE_NAME="add_sub_rcg.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNJ3ZMS76T:adder3|alt_dspbuilder_SAdderSub:adder_1_1|LPM_ADD_SUB:\pip:genaa:U0" CBX_FILE_NAME="add_sub_msh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNYLHLSTWT:adder4|alt_dspbuilder_SAdderSub:adder_1_1|LPM_ADD_SUB:\pip:genaa:U0" CBX_FILE_NAME="add_sub_jsh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|highpass|highpass_GN:auto_inst|highpass_GN_highpass_IIR3:highpass_iir3_0|alt_dspbuilder_parallel_adder_GNZVU6W3GJ:adder1|alt_dspbuilder_SAdderSub:adder_1_2|LPM_ADD_SUB:\nopip:gensa:U0" CBX_FILE_NAME="add_sub_0dg.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

@@ -1,0 +1,157 @@
+//���ų���ϵͳ�����ļ�
+
+module TOP (
+//SYSTEM
+//	input 	wire 			FPGA_CLK_SYS, 					//Oscillator Clock 40M
+	input 	wire 			FPGA_CLK_AD, 					//Oscillator Clock 50M
+	input 	wire			RESET_IN,						//Reset input
+	output	wire			FPGA_CLK_EN,					//50M Oscillator Clock Enable
+	output	wire			LCDBL_EN,
+	
+//ARM BUS   wire
+	input 	wire			ARM_WEn,
+	input 	wire			ARM_OEn,
+	input 	wire			ARM_CE,
+	input 	wire[7:0]	ARM_ADDR,
+	inout		wire[15:0] 	ARM_DATA,
+	
+//DAC AD5322	
+	output  wire			DA_LDAC,
+	output  wire			DA_DIN,
+	output  wire			DA_SYNC,
+	output  wire			DA_SCLK,
+	
+//ADC AD9215
+	output 	wire			AD_CLK,
+	//input 	wire			AD_OTR,
+	input 	wire[9:0]	AD_D,
+
+//Coder
+	input		wire			CODER_A,
+	input		wire			CODER_B,
+	
+//EMAT Board
+	input		wire			TempOV,
+//	input		wire			IOV_HIGH,
+//	input		wire			IOV_LOW,
+	output	wire			TRIGGER_P,				//Trigger signal p
+	output	wire			TRIGGER_N,				//Trigger signal n
+	output 	wire 	      receive_amp_en,
+//	output 	wire			PROBE_MODE,				//probe mode change: 1 --> Double Mode; 0 --> Sigle Mode
+//	output	wire			FPGA_AGP1,
+//	output	wire			FPGA_AGP0,
+//	inout 	wire[ 9:0]	FPGA_AGP,				//Reserved Analog Control Signal
+		
+//Power
+	input 	wire			KEY_DET,					//System Power Key Detect
+	output 	wire			KEY_CTRL,				//System POWER ON/OFF Control 1 --> ON; 0 --> OFF
+	output 	wire			PWDN,						//Mosfet Driver(15V) control 1 --> ON; 0 --> OFF
+	output	wire			POW_CTRL,				//HV Charge Control: 1 --> ON; 0 -- > OFF
+	
+//Peripheral
+	inout 	wire[7:2] 	FPGA_GPIO,				//FPGA GPIO, connected with ARM
+	output 	wire			FPGA_BUZZER				//BUZZER Control Signal
+//	output 	wire			SYS_RESET_n				//System Reset Signal output, for ARM and other device
+
+	);
+	
+	assign FPGA_CLK_EN = 1'b1;
+//	assign LCDBL_EN = 1'b0;
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//---------------clk sources from PLL----------------------
+//
+//
+	wire	clk_100;
+	wire	clk_80;
+	wire	clk_1;
+	wire	clk_100_delay;
+	wire	clk_sys;					//
+	wire	clk_coder;
+		
+	sys_pll sys_pll(
+		.inclk0(FPGA_CLK_AD),
+		.c0    (clk_100),
+		.c1    (clk_80),
+		.c2    (clk_1),
+		.c3    (clk_100_delay)
+		);
+//	wire			AD_CLK;
+//	wire			AD_OTR;
+//	wire			AD_sample_en;
+//	reg	[9:0]	AD_D;
+//	always @ (negedge AD_CLK or negedge AD_sample_en)
+//	begin
+//		if(~AD_sample_en)
+//			begin
+//				AD_D <= 10'd0;
+//			end
+//		else
+//			begin
+//				AD_D <= AD_D + 10'd1;
+//			end
+//	end
+		
+	assign clk_sys = clk_80;						//
+	assign clk_coder = clk_1;						//
+//	assign FPGA_BUZZER = 1'b0;
+	
+	//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	Electromagnetic_Acoustic Electromagnetic_Acoustic(
+		//------------Global Signals------------------
+		.clk_sys				(clk_sys			),
+		.clk_100				(clk_100			),
+		.clk_100_delay		(clk_100_delay	),
+		.clk_coder			(clk_coder		),
+//		.clk_sample_delay	(clk_sample_delay),
+		.RESET_N				(RESET_IN		),
+		.alarm_buzzer		(FPGA_BUZZER	),
+//		.SYS_RST				(SYS_RESET_n	),
+		//-------------ARM interface------------------			
+		.ARM_A				(ARM_ADDR		),
+		.ARM_D				(ARM_DATA		),
+		.iARM_CE_N			(ARM_CE			), 
+		.iARM_OE_N			(ARM_OEn			),//nOE (Output Enable) indicates that the current bus cycle is a read cycle.
+		.iARM_WE_N			(ARM_WEn			),//nWE (Write Enable) indicates that the current bus cycle is a write cycle.
+		.iWrite_Strobe		(					),
+		.iRead_Strobe		(					),
+		.iARM_DAC_ALARM	(FPGA_GPIO[7]	),
+		.iARM_VAL_ALARM	(FPGA_GPIO[6]	),
+		.iARM_LOGIC_RESET	(FPGA_GPIO[2] 	),
+		//------------DA0 interface-------------------	
+		.oDA_SCLK			(DA_SCLK			),	
+		.oDA_DOUT			(DA_DIN			),	
+		.oDA_SYNC_n			(DA_SYNC			),  
+		.oDA_LDAC_n			(DA_LDAC			),  
+		//------------AD9224 interface----------------
+		.oAD0_CLK			(AD_CLK			),//max = 40Mhz
+		//.iAD0_otr			(AD_OTR			),//out of range
+		.iAD0_DATA			(AD_D				),//�������� 
+		//-----------Coder interface-----------------
+		.CoderInputA		(CODER_A			),
+		.CoderInputB		(CODER_B			),
+		//-----------T/R interface-----------------
+		.protect_in			(TempOV			),
+		.oTrigger0			(TRIGGER_P		),
+		.oTrigger1			(TRIGGER_N		),
+		.receive_amp_en  (receive_amp_en),
+		//.Probe_mode			(PROBE_MODE		),
+		//-------------POWER interface------------------
+		.pow_key_det		(KEY_DET			),
+		.powen_sys			(KEY_CTRL		),
+		.powen_mosfet		(PWDN				),
+		.powen_lcd			(LCDBL_EN		),
+		.powen_HV			(POW_CTRL		)
+		//------------- test ------------------
+		//.AD_sample_en		(AD_sample_en	)
+		//.test1				(					),
+		
+		);
+	
+	
+	
+endmodule 
+//////////////////////////////////////////////////////////////////////////////////////
+//˵����
+//1.Electromagnetic_Acoustic.v����һ��debug�궨�壬����FPGA�������ʱʹ�ã�����ʹ��Ӧ��ע�͵�
+//2.signal_pro.v ����һ��simulate�궨�壬���ڷ���ʱʹ�ã�����ʹ��ʱע�͵�
+//////////////////////////////////////////////////////////////////////////////////////
